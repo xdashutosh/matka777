@@ -1,69 +1,22 @@
-import React, { useState } from 'react';
-import { Download, FileDown, Loader } from 'lucide-react';
+import React from 'react';
+import { Download, FileDown } from 'lucide-react';
 
 const Home = () => {
-  const [isDownloading, setIsDownloading] = useState(false);
-  const [downloadProgress, setDownloadProgress] = useState(0);
 
   const apkUrl = 'https://github.com/xdashutosh/apks/raw/refs/heads/main/app-release.apk';
   const fileName = 'app-release.apk';
 
-  const handleDownload = async () => {
-    try {
-      setIsDownloading(true);
-      setDownloadProgress(0);
-
-      // Fetch the file
-      const response = await fetch(apkUrl);
-      
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const contentLength = response.headers.get('content-length');
-      const total = parseInt(contentLength, 10);
-      let loaded = 0;
-
-      const reader = response.body.getReader();
-      const chunks = [];
-
-      while (true) {
-        const { done, value } = await reader.read();
-        
-        if (done) break;
-        
-        chunks.push(value);
-        loaded += value.length;
-        
-        if (total) {
-          setDownloadProgress(Math.round((loaded / total) * 100));
-        }
-      }
-
-      // Create blob from chunks
-      const blob = new Blob(chunks, { type: 'application/vnd.android.package-archive' });
-      
-      // Create download link
-      const url = window.URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = fileName;
-      document.body.appendChild(link);
-      link.click();
-      
-      // Cleanup
-      document.body.removeChild(link);
-      window.URL.revokeObjectURL(url);
-      
-      setIsDownloading(false);
-      setDownloadProgress(0);
-      
-    } catch (error) {
-      console.error('Download failed:', error);
-      setIsDownloading(false);
-      setDownloadProgress(0);
-      alert('Download failed. Please try again.');
-    }
+  const handleDownload = () => {
+    // Create a temporary link element for direct download
+    const link = document.createElement('a');
+    link.href = apkUrl;
+    link.download = fileName;
+    link.target = '_blank'; // Open in new tab as fallback
+    
+    // Append to body, click, and remove
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   return (
@@ -82,38 +35,14 @@ const Home = () => {
           </div>
         </div>
 
-        {isDownloading && (
-          <div className="mb-6">
-            <div className="bg-gray-200 rounded-full h-2 mb-2">
-              <div 
-                className="bg-blue-600 h-2 rounded-full transition-all duration-300"
-                style={{ width: `${downloadProgress}%` }}
-              ></div>
-            </div>
-            <p className="text-sm text-gray-600">Downloading... {downloadProgress}%</p>
-          </div>
-        )}
+        {/* Progress section removed since we can't track progress with direct download */}
 
         <button
           onClick={handleDownload}
-          disabled={isDownloading}
-          className={`w-full py-3 px-6 rounded-lg font-semibold text-white transition-all duration-200 flex items-center justify-center gap-2 ${
-            isDownloading 
-              ? 'bg-gray-400 cursor-not-allowed' 
-              : 'bg-blue-600 hover:bg-blue-700 active:bg-blue-800 hover:shadow-lg'
-          }`}
+          className="w-full py-3 px-6 rounded-lg font-semibold text-white transition-all duration-200 flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 hover:shadow-lg"
         >
-          {isDownloading ? (
-            <>
-              <Loader className="w-5 h-5 animate-spin" />
-              Downloading...
-            </>
-          ) : (
-            <>
-              <Download className="w-5 h-5" />
-              Download APK
-            </>
-          )}
+          <Download className="w-5 h-5" />
+          Download APK
         </button>
 
         <p className="text-xs text-gray-500 mt-4">
