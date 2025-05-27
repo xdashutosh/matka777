@@ -54,65 +54,138 @@ export default function Home() {
   const games = [
     { 
       name: "Single Digit", 
-      range: "1-10", 
-      payout: "9x", 
+      range: "0-9", 
+      payout: "1 KA 10", 
       minBet: "₹10",
-      description: "Pick a number from 1 to 10",
+      description: "Pick a single number from 0 to 9",
       icon: "🎯",
-      gradient: "from-purple-600 to-pink-600"
+      gradient: "from-purple-600 to-pink-600",
+      details: "Choose any single digit and win 10 times your bet amount"
     },
     { 
-      name: "Double Digit", 
-      range: "1-100", 
-      payout: "90x", 
-      minBet: "₹10",
-      description: "Choose from 1 to 100",
-      icon: "💎",
-      gradient: "from-blue-600 to-cyan-600"
-    },
-    { 
-      name: "Triple Digit", 
-      range: "1-1000", 
-      payout: "900x", 
-      minBet: "₹10",
-      description: "Select from 1 to 1000",
-      icon: "👑",
-      gradient: "from-orange-600 to-red-600"
-    },
-    { 
-      name: "Jodi", 
+      name: "Jodi Digits", 
       range: "00-99", 
-      payout: "95x", 
+      payout: "1 KA 100", 
       minBet: "₹10",
-      description: "Pick a two-digit pair",
+      description: "Pick a two-digit combination",
       icon: "🎰",
-      gradient: "from-green-600 to-emerald-600"
+      gradient: "from-blue-600 to-cyan-600",
+      details: "Select any two-digit number combination from 00 to 99"
+    },
+    { 
+      name: "Single Pana", 
+      range: "000-999", 
+      payout: "1 KA 150", 
+      minBet: "₹10",
+      description: "Three-digit number with all different digits",
+      icon: "🔥",
+      gradient: "from-green-600 to-emerald-600",
+      details: "Pick 3 different digits like 123, 456, 789"
+    },
+    { 
+      name: "Double Pana", 
+      range: "000-999", 
+      payout: "1 KA 300", 
+      minBet: "₹10",
+      description: "Three-digit number with two same digits",
+      icon: "💎",
+      gradient: "from-orange-600 to-red-600",
+      details: "Choose numbers like 112, 223, 334 with two identical digits"
+    },
+    { 
+      name: "Triple Pana", 
+      range: "000-999", 
+      payout: "1 KA 700", 
+      minBet: "₹10",
+      description: "Three identical digits",
+      icon: "👑",
+      gradient: "from-pink-600 to-purple-600",
+      details: "Select triple numbers like 111, 222, 333, 444"
+    },
+    { 
+      name: "Half Sangam", 
+      range: "0-9 + Pana", 
+      payout: "1 KA 1000", 
+      minBet: "₹10",
+      description: "Combination of single digit + pana",
+      icon: "⚡",
+      gradient: "from-yellow-600 to-orange-600",
+      details: "Match single digit from one session with pana from another"
+    },
+    { 
+      name: "Full Sangam", 
+      range: "Pana + Pana", 
+      payout: "1 KA 10000", 
+      minBet: "₹10",
+      description: "Combination of two panas",
+      icon: "💰",
+      gradient: "from-red-600 to-pink-600",
+      details: "Ultimate jackpot! Match both opening and closing panas"
     }
   ];
 
+  const liveGames = [
+    { name: "SRIDEVI MORNING", result: "120 - 35 - 357", status: "Betting is Close", time: "11:05 AM" },
+    { name: "MANGAL MORNING", result: "457 - 63 - 337", status: "Betting is Close", time: "11:20 AM" },
+    { name: "SITA MORNING", result: "468 - 85 - 267", status: "Betting is Close", time: "11:35 AM" },
+    { name: "GEETA MORNING", result: "358 - 67 - 359", status: "Betting is Close", time: "11:50 AM" },
+    { name: "KARNATAKA DAY", result: "250 - 70 - 389", status: "Betting is Close", time: "12:05 PM" },
+    { name: "TULSI MORNING", result: "145 - 06 - 899", status: "Betting is Close", time: "12:20 PM" },
+    { name: "MILAN MORNING", result: "579 - 14 - 347", status: "Betting is Close", time: "12:35 PM" },
+    { name: "ANDHRA MORNING", result: "228 - 25 - 249", status: "Betting is Close", time: "12:50 PM" },
+    { name: "KALYAN MORNING", result: "490 - 35 - 249", status: "Betting is Close", time: "01:05 PM" },
+    { name: "JANTA DAY", result: "189 - 82 - 129", status: "Betting is Close", time: "01:20 PM" },
+    { name: "TIME BAZAR MORNING", result: "123 - 67 - 250", status: "Betting is Close", time: "01:35 PM" },
+    { name: "MAIN BAZAR MORNING", result: "223 - 73 - 120", status: "Betting is Close", time: "01:50 PM" }
+  ];
+
   const testimonials = [
-    { name: "Rajesh K.", win: "₹45,000", game: "Triple Digit", text: "Won big on my third try! The platform is genuine and payouts are instant." },
-    { name: "Priya S.", win: "₹22,500", game: "Double Digit", text: "I've been playing for 3 months now. Consistent wins and great support team!" },
-    { name: "Amit P.", win: "₹87,000", game: "Jodi", text: "Life-changing win! Withdrew my money within minutes. Highly recommended!" },
+    { name: "Rajesh K.", win: "₹45,000", game: "Triple Pana", text: "Won big on my third try! The platform is genuine and payouts are instant." },
+    { name: "Priya S.", win: "₹22,500", game: "Double Pana", text: "I've been playing for 3 months now. Consistent wins and great support team!" },
+    { name: "Amit P.", win: "₹87,000", game: "Full Sangam", text: "Life-changing win! Withdrew my money within minutes. Highly recommended!" },
     { name: "Sunita D.", win: "₹15,800", game: "Single Digit", text: "Started with just ₹100 and now I'm earning daily. Amazing platform!" }
   ];
 
-    const apkUrl = 'https://github.com/xdashutosh/apks/raw/refs/heads/main/app-release.apk';
+   const apkUrl = 'https://github.com/xdashutosh/apks/raw/refs/heads/main/app-release.apk';
   const fileName = 'app-release.apk';
 
-  const handleDownload = () => {
-    // Create a temporary link element for direct download
-    const link = document.createElement('a');
-    link.href = apkUrl;
-    link.download = fileName;
-    link.target = '_blank'; // Open in new tab as fallback
-    
-    // Append to body, click, and remove
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+  const handleDownload = async () => {
+    try {
+      // Show loading state (optional)
+      console.log('Starting download...');
+      
+      // Fetch the file as blob
+      const response = await fetch(apkUrl);
+      if (!response.ok) {
+        throw new Error('Download failed');
+      }
+      
+      const blob = await response.blob();
+      
+      // Create blob URL
+      const blobUrl = window.URL.createObjectURL(blob);
+      
+      // Create temporary link element for direct download
+      const link = document.createElement('a');
+      link.href = blobUrl;
+      link.download = fileName;
+      link.style.display = 'none';
+      
+      // Append to body, click, and remove
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      
+      // Clean up blob URL
+      window.URL.revokeObjectURL(blobUrl);
+      
+      console.log('Download completed successfully');
+    } catch (error) {
+      console.error('Download failed:', error);
+      // Fallback to direct link if blob download fails
+      window.open(apkUrl, '_blank');
+    }
   };
-
 
   return (
     <div className="min-h-screen bg-black text-white overflow-hidden">
@@ -162,6 +235,7 @@ export default function Home() {
             
             <div className="hidden md:flex items-center space-x-8">
               <a href="#games" className="hover:text-purple-400 transition-colors">Games</a>
+              <a href="#live-games" className="hover:text-purple-400 transition-colors">Live Games</a>
               <a href="#how-it-works" className="hover:text-purple-400 transition-colors">How It Works</a>
               <a href="#winners" className="hover:text-purple-400 transition-colors">Winners</a>
               <a href="#contact" className="hover:text-purple-400 transition-colors">Contact</a>
@@ -249,6 +323,108 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Live Games Section */}
+      <section id="live-games" className="py-20 px-6 bg-gradient-to-b from-black to-purple-900/10">
+        <div className="container mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">
+              <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                Live Games & Results
+              </span>
+            </h2>
+            <p className="text-xl text-gray-400">Real-time updates from all active games</p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mb-12">
+            {liveGames.map((game, index) => (
+              <div key={index} className="bg-gradient-to-br from-gray-900/90 to-black backdrop-blur-sm rounded-xl p-4 border border-gray-800 hover:border-purple-500/50 transition-all">
+                <div className="flex justify-between items-start mb-3">
+                  <h3 className="font-bold text-sm text-purple-400">{game.name}</h3>
+                  <span className="text-xs text-red-400 bg-red-900/30 px-2 py-1 rounded">
+                    {game.status}
+                  </span>
+                </div>
+                <div className="text-2xl font-bold text-white mb-2">{game.result}</div>
+                <div className="flex justify-between items-center text-xs text-gray-400">
+                  <span>Next: {game.time}</span>
+                  <div className="flex gap-2">
+                    <button className="px-3 py-1 bg-yellow-600/20 text-yellow-400 rounded border border-yellow-600/30 hover:bg-yellow-600/30">
+                      Jodi Chart
+                    </button>
+                    <button className="px-3 py-1 bg-blue-600/20 text-blue-400 rounded border border-blue-600/30 hover:bg-blue-600/30">
+                      Pana Chart
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Game Rules Section */}
+          <div className="bg-gradient-to-br from-purple-900/20 to-pink-900/20 backdrop-blur-sm rounded-2xl p-8 border border-purple-500/20">
+            <h3 className="text-2xl font-bold mb-6 text-center">
+              <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                Game Rules & Payouts
+              </span>
+            </h3>
+            
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="space-y-4">
+                <h4 className="font-semibold text-purple-400">Basic Games</h4>
+                <div className="space-y-2 text-sm">
+                  <div className="flex justify-between">
+                    <span>Single Digit (0-9)</span>
+                    <span className="text-green-400">1 KA 10</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>Jodi Digits (00-99)</span>
+                    <span className="text-green-400">1 KA 100</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="space-y-4">
+                <h4 className="font-semibold text-purple-400">Pana Games</h4>
+                <div className="space-y-2 text-sm">
+                  <div className="flex justify-between">
+                    <span>Single Pana</span>
+                    <span className="text-green-400">1 KA 150</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>Double Pana</span>
+                    <span className="text-green-400">1 KA 300</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>Triple Pana</span>
+                    <span className="text-green-400">1 KA 700</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="space-y-4">
+                <h4 className="font-semibold text-purple-400">Sangam Games</h4>
+                <div className="space-y-2 text-sm">
+                  <div className="flex justify-between">
+                    <span>Half Sangam</span>
+                    <span className="text-green-400">1 KA 1000</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>Full Sangam</span>
+                    <span className="text-green-400">1 KA 10000</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div className="mt-6 p-4 bg-yellow-900/20 border border-yellow-600/30 rounded-lg">
+              <p className="text-sm text-yellow-300">
+                <strong>Note:</strong> "1 KA" means if you bet ₹1, you win the amount shown. For example, 1 KA 100 means ₹1 bet wins ₹100, ₹10 bet wins ₹1000, and so on.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Games Section */}
       <section id="games" className="py-20 px-6 relative">
         <div className="container mx-auto">
@@ -261,7 +437,7 @@ export default function Home() {
             <p className="text-xl text-gray-400">Multiple ways to win big every day!</p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {games.map((game, index) => (
               <div
                 key={index}
@@ -272,26 +448,27 @@ export default function Home() {
                      style={{ backgroundImage: `linear-gradient(135deg, ${game.gradient.split(' ')[1]} 0%, ${game.gradient.split(' ')[3]} 100%)` }} />
                 
                 <div className="relative p-6">
-                  <div className="text-5xl mb-4">{game.icon}</div>
-                  <h3 className="text-2xl font-bold mb-2">{game.name}</h3>
-                  <p className="text-gray-400 mb-4">{game.description}</p>
+                  <div className="text-4xl mb-3">{game.icon}</div>
+                  <h3 className="text-xl font-bold mb-2">{game.name}</h3>
+                  <p className="text-gray-400 text-sm mb-3">{game.description}</p>
+                  <p className="text-xs text-gray-500 mb-4">{game.details}</p>
                   
                   <div className="space-y-2 mb-6">
-                    <div className="flex justify-between">
+                    <div className="flex justify-between text-sm">
                       <span className="text-gray-500">Range:</span>
                       <span className="font-semibold">{game.range}</span>
                     </div>
-                    <div className="flex justify-between">
+                    <div className="flex justify-between text-sm">
                       <span className="text-gray-500">Payout:</span>
                       <span className="font-semibold text-green-400">{game.payout}</span>
                     </div>
-                    <div className="flex justify-between">
+                    <div className="flex justify-between text-sm">
                       <span className="text-gray-500">Min Bet:</span>
                       <span className="font-semibold">{game.minBet}</span>
                     </div>
                   </div>
 
-                  <button className={`w-full py-3 rounded-lg bg-gradient-to-r ${game.gradient} font-semibold transition-all hover:shadow-lg hover:scale-105`}>
+                  <button className={`w-full py-3 rounded-lg bg-gradient-to-r ${game.gradient} font-semibold transition-all hover:shadow-lg hover:scale-105 text-sm`}>
                     Play Now
                   </button>
                 </div>
@@ -317,7 +494,7 @@ export default function Home() {
             {[
               { icon: CreditCard, title: "1. Register & Deposit", desc: "Create your account and add funds securely using UPI, Bank Transfer, or Wallets" },
               { icon: Target, title: "2. Pick Your Numbers", desc: "Choose your lucky numbers from our various game modes and place your bet" },
-              { icon: Gift, title: "3. Win & Withdraw", desc: "Win up to 900x your bet! Instant withdrawals to your bank account" }
+              { icon: Gift, title: "3. Win & Withdraw", desc: "Win up to 10000x your bet! Instant withdrawals to your bank account" }
             ].map((step, index) => (
               <div key={index} className="relative group">
                 <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl blur-xl opacity-20 group-hover:opacity-40 transition-opacity" />
@@ -428,10 +605,10 @@ export default function Home() {
               <h2 className="text-4xl md:text-5xl font-bold mb-6">Ready to Win Big?</h2>
               <p className="text-xl mb-8 opacity-90">Join thousands of winners today!</p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <button className="px-8 py-4 bg-white text-purple-600 rounded-full font-bold text-lg hover:scale-105 transition-transform">
+                <button onClick={handleDownload} className="px-8 py-4 bg-white text-purple-600 rounded-full font-bold text-lg hover:scale-105 transition-transform">
                   Register Now - Get ₹100 Bonus
                 </button>
-                <button className="px-8 py-4 bg-black/30 backdrop-blur-sm rounded-full font-bold text-lg hover:bg-black/40 transition-all">
+                <button onClick={handleDownload} className="px-8 py-4 bg-black/30 backdrop-blur-sm rounded-full font-bold text-lg hover:bg-black/40 transition-all">
                   Download App
                 </button>
               </div>
