@@ -44,7 +44,7 @@ function App() {
             style={{ scaleX: scrollYProgress }}
           />
 
-          <Header />
+          {/* <Header /> */}
 
           <main>
             <Routes>
