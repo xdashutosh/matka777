@@ -4,22 +4,16 @@ import { Button } from "@/components/ui/button";
 import {
   Menu,
   X,
-  LayoutGrid,
-  Tags,
-  BookOpen,
-  Users,
-  Briefcase,
-  ChevronDown,
-  Contact2,
+  Home,
+  BarChart3,
+  Download,
 } from "lucide-react";
 import logo from "@/assets/logo.png";
 
-// Define your navigation items with paths
+// Define your navigation items with paths - only Home and Charts
 const navLinks = [
-  { name: "Solutions", iconComponent: LayoutGrid, path: "/solutions" },
-  { name: "Pricing",   iconComponent: Tags,       path: "/pricing"   },
-  { name: "Contact",   iconComponent: Contact2,   path: "/contact"   },
-  { name: "Projects",  iconComponent: Users,      path: "/projects"  },
+  { name: "Home", iconComponent: Home, path: "/" },
+  { name: "Charts", iconComponent: BarChart3, path: "/charts" },
 ];
 
 const TrevietaIcon = () => (
@@ -53,6 +47,22 @@ const Header = () => {
     };
   }, [isMenuOpen]);
 
+   const apkUrl = 'https://github.com/xdashutosh/apks/raw/refs/heads/main/app-release.apk';
+  const fileName = 'app-release.apk';
+
+  const handleDownload = () => {
+    // Create a temporary link element for direct download
+    const link = document.createElement('a');
+    link.href = apkUrl;
+    link.download = fileName;
+    link.target = '_blank'; // Open in new tab as fallback
+    
+    // Append to body, click, and remove
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <header className="sticky top-0 left-0 right-0 z-50 py-2 transition-all duration-300">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -63,7 +73,7 @@ const Header = () => {
             <TrevietaIcon />
             <div className="ml-2.5">
               <span className="text-lg md:text-xl font-bold text-sky-600 group-hover:text-sky-700 transition-colors">
-                ProCooling
+                MATKA 777
               </span>
             </div>
           </NavLink>
@@ -86,22 +96,17 @@ const Header = () => {
                     <Icon size={18} strokeWidth={1.75} className="text-current" />
                   </span>
                   <span>{link.name}</span>
-                  {(link.name === "Solutions") && (
-                    <ChevronDown size={16} strokeWidth={2} className="text-gray-500" />
-                  )}
                   <span className="absolute bottom-0.5 left-1/2 w-0 h-[2px] bg-sky-500 group-hover:w-[calc(100%-1.5rem)] -translate-x-1/2 transition-all duration-300"></span>
                 </NavLink>
               );
             })}
           </nav>
 
-          {/* Auth Buttons */}
-          <div className="hidden md:flex items-center space-x-2">
-            <Button variant="ghost" className="text-sky-600 hover:text-sky-700 hover:bg-gray-100 px-4 py-2 text-sm rounded-full font-medium">
-              Login
-            </Button>
-            <Button className="bg-sky-500 hover:bg-sky-600 shadow-sm hover:shadow-md hover:shadow-sky-500/20 text-white rounded-full px-6 py-2 text-sm font-medium transition-all duration-300 transform hover:-translate-y-px">
-              Register
+          {/* Download App Button */}
+          <div className="hidden md:flex items-center">
+            <Button  onClick={handleDownload}className="bg-sky-500 hover:bg-sky-600 shadow-sm hover:shadow-md hover:shadow-sky-500/20 text-white rounded-full px-6 py-2 text-sm font-medium transition-all duration-300 transform hover:-translate-y-px flex items-center space-x-2">
+              <Download size={16} strokeWidth={2} />
+              <span>Download App</span>
             </Button>
           </div>
 
@@ -142,20 +147,15 @@ const Header = () => {
                     <Icon size={20} strokeWidth={1.75} className="text-current" />
                   </span>
                   <span>{link.name}</span>
-                  {link.name === "Solutions" && (
-                    <ChevronDown size={16} strokeWidth={2} className="ml-auto text-gray-500" />
-                  )}
                 </NavLink>
               );
             })}
 
             <div className="border-t border-gray-200 my-3"></div>
             <div className="flex flex-col space-y-3 p-1">
-              <Button variant="ghost" className="text-sky-600 hover:text-sky-700 hover:bg-gray-100 justify-center w-full py-2.5 rounded-full border border-gray-300 font-medium" onClick={() => setIsMenuOpen(false)}>
-                Login
-              </Button>
-              <Button className="bg-sky-500 hover:bg-sky-600 text-white justify-center w-full py-2.5 rounded-full shadow-sm font-medium" onClick={() => setIsMenuOpen(false)}>
-                Register
+              <Button className="bg-sky-500 hover:bg-sky-600 text-white justify-center w-full py-2.5 rounded-full shadow-sm font-medium flex items-center space-x-2" onClick={() => setIsMenuOpen(false)}>
+                <Download size={16} strokeWidth={2} />
+                <span>Download App</span>
               </Button>
             </div>
           </nav>
