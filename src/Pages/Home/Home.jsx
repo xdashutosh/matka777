@@ -146,44 +146,70 @@ export default function Home() {
     { name: "Sunita D.", win: "₹15,800", game: "Single Digit", text: "Started with just ₹100 and now I'm earning daily. Amazing platform!" }
   ];
 
-   const apkUrl = 'https://github.com/xdashutosh/apks/raw/refs/heads/main/app-release.apk';
+  const apkUrl = 'https://github.com/xdashutosh/apks/raw/refs/heads/main/app-release.apk';
   const fileName = 'app-release.apk';
 
   const handleDownload = async () => {
     try {
-      // Show loading state (optional)
-      console.log('Starting download...');
+      console.log('Fetching file...');
       
-      // Fetch the file as blob
-      const response = await fetch(apkUrl);
+      // Fetch the file with no-cors to avoid redirect issues
+      const response = await fetch(apkUrl, {
+        method: 'GET',
+        mode: 'cors', // Try cors first
+        cache: 'no-cache'
+      });
+      
       if (!response.ok) {
-        throw new Error('Download failed');
+        throw new Error(`HTTP error! status: ${response.status}`);
       }
       
+      // Get the blob data
       const blob = await response.blob();
+      console.log('File fetched, size:', blob.size, 'bytes');
       
-      // Create blob URL
-      const blobUrl = window.URL.createObjectURL(blob);
+      // Force download using blob URL
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.style.display = 'none';
+      a.href = url;
+      a.download = fileName;
       
-      // Create temporary link element for direct download
-      const link = document.createElement('a');
-      link.href = blobUrl;
-      link.download = fileName;
-      link.style.display = 'none';
+      document.body.appendChild(a);
+      a.click();
       
-      // Append to body, click, and remove
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+      // Cleanup
+      setTimeout(() => {
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      }, 100);
       
-      // Clean up blob URL
-      window.URL.revokeObjectURL(blobUrl);
+      console.log('Download initiated');
       
-      console.log('Download completed successfully');
     } catch (error) {
-      console.error('Download failed:', error);
-      // Fallback to direct link if blob download fails
-      window.open(apkUrl, '_blank');
+      console.error('Blob download failed:', error);
+      
+      // Alternative method - create iframe download
+      try {
+        const iframe = document.createElement('iframe');
+        iframe.style.display = 'none';
+        iframe.src = apkUrl + '?download=1';
+        document.body.appendChild(iframe);
+        
+        setTimeout(() => {
+          document.body.removeChild(iframe);
+        }, 5000);
+        
+        console.log('Iframe download initiated');
+      } catch (iframeError) {
+        console.error('Iframe download failed:', iframeError);
+        // Last resort - forced download attribute
+        const link = document.createElement('a');
+        link.href = apkUrl;
+        link.download = fileName;
+        link.setAttribute('download', fileName);
+        link.click();
+      }
     }
   };
 
