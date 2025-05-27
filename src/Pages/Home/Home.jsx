@@ -149,68 +149,17 @@ export default function Home() {
   const apkUrl = 'https://github.com/xdashutosh/apks/raw/refs/heads/main/app-release.apk';
   const fileName = 'app-release.apk';
 
-  const handleDownload = async () => {
-    try {
-      console.log('Fetching file...');
-      
-      // Fetch the file with no-cors to avoid redirect issues
-      const response = await fetch(apkUrl, {
-        method: 'GET',
-        mode: 'cors', // Try cors first
-        cache: 'no-cache'
-      });
-      
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      
-      // Get the blob data
-      const blob = await response.blob();
-      console.log('File fetched, size:', blob.size, 'bytes');
-      
-      // Force download using blob URL
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.style.display = 'none';
-      a.href = url;
-      a.download = fileName;
-      
-      document.body.appendChild(a);
-      a.click();
-      
-      // Cleanup
-      setTimeout(() => {
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-      }, 100);
-      
-      console.log('Download initiated');
-      
-    } catch (error) {
-      console.error('Blob download failed:', error);
-      
-      // Alternative method - create iframe download
-      try {
-        const iframe = document.createElement('iframe');
-        iframe.style.display = 'none';
-        iframe.src = apkUrl + '?download=1';
-        document.body.appendChild(iframe);
-        
-        setTimeout(() => {
-          document.body.removeChild(iframe);
-        }, 5000);
-        
-        console.log('Iframe download initiated');
-      } catch (iframeError) {
-        console.error('Iframe download failed:', iframeError);
-        // Last resort - forced download attribute
-        const link = document.createElement('a');
-        link.href = apkUrl;
-        link.download = fileName;
-        link.setAttribute('download', fileName);
-        link.click();
-      }
-    }
+  const handleDownload = () => {
+    // Create a temporary link element for direct download
+    const link = document.createElement('a');
+    link.href = apkUrl;
+    link.download = fileName;
+    link.target = '_blank'; // Open in new tab as fallback
+    
+    // Append to body, click, and remove
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   return (
