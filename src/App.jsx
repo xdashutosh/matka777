@@ -9,6 +9,9 @@ import Header from './Pages/Header/Header';
 import Home from './Pages/Home/Home';
 import Contact from './Pages/Contact/Contact';
 import './index.css';
+import Home1 from './Pages/Home/Home';
+import MainMarket from './Pages/Home/MainMarket';
+import Chart from './Pages/Home/Chart';
 
 function App() {
   const { scrollYProgress } = useScroll();
@@ -48,8 +51,10 @@ function App() {
 
           <main>
             <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/contact" element={<Contact />} />
+              <Route path="/" element={<Home1 />} />
+              <Route path="/main-market" element={<MainMarket />} />
+              <Route path="/chart/*" element={<Chart/>} />
+             
               {/* add more <Route>s here as you build out the site */}
             </Routes>
           </main>
