@@ -23,10 +23,10 @@ function App() {
     };
   }, []);
 
-  const siteName = "ProCooling.in";
-  const defaultTitle = "Mist Foggers & Water Sprayer Cooling Systems India | ProCooling.in";
-  const defaultDescription = "ProCooling.in: Leading provider of innovative mist foggers, water sprayers, and comprehensive cooling systems for outdoor, industrial, and agricultural use in India.";
-  const siteUrl = "https://procooling.in";
+  const siteName = "kalyan-555.com";
+  const defaultTitle = "Kalyan 555 - Live Kalyan Matka Results";
+  const defaultDescription = "Kalyan 555 - Your Ultimate Destination for Live Kalyan Matka Results";
+  const siteUrl = "https://kalyan-555.in";
 
   return (
     <HelmetProvider>
